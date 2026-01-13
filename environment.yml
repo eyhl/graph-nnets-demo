@@ -1,0 +1,13 @@
+name: graph-nnets-demo
+channels:
+  - pytorch
+  - pyg
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pytorch
+  - torchvision
+  - pyg
+  - pip:
+      - -r requirements.txt
