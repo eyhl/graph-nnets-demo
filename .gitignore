@@ -80,6 +80,9 @@ target/
 /data/
 /outputs/
 /wandb/
+/models/*.pt
+/reports/restats_*
+/reports/*.prof
 
 # Mac OS-specific storage files
 .DS_Store
