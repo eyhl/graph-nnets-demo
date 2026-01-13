@@ -36,6 +36,14 @@ clean:
 lint:
 	flake8 src
 
+## Train model (Hydra overrides via ARGS="...")
+train:
+	$(PYTHON_INTERPRETER) src/models/train_model.py $(ARGS)
+
+## Evaluate saved checkpoint (Hydra overrides via ARGS="...")
+eval:
+	$(PYTHON_INTERPRETER) src/models/predict_model.py $(ARGS)
+
 
 ## Set up python interpreter environment
 create_environment:

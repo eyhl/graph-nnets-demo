@@ -1,6 +1,9 @@
+import json
 import logging
 import os
+import platform
 import sys
+from datetime import datetime, timezone
 from typing import Any, Optional
 
 import hydra
@@ -100,11 +103,11 @@ def train(config: DictConfig) -> None:
 
             wandb.log({"train/loss": loss.item(), "epoch": epoch})
 
-    # Save model
+    # Save model + metadata
     directory = orig_cwd + "/models/"
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-    filename = directory + hparams["checkpoint_name"]
+    os.makedirs(directory, exist_ok=True)
+
+    checkpoint_path = os.path.join(directory, hparams["checkpoint_name"])
     checkpoint = {
         "num_features": hparams["num_features"],
         "num_classes": hparams["num_classes"],
@@ -112,7 +115,21 @@ def train(config: DictConfig) -> None:
         "dropout": hparams["dropout"],
         "state_dict": model.state_dict(),
     }
-    torch.save(checkpoint, filename)
+    torch.save(checkpoint, checkpoint_path)
+
+    metadata = {
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "checkpoint": os.path.basename(checkpoint_path),
+        "hydra": OmegaConf.to_container(config, resolve=True),
+        "python": platform.python_version(),
+        "platform": platform.platform(),
+        "torch": getattr(torch, "__version__", None),
+        "torch_geometric": getattr(torch_geometric, "__version__", None),
+        "wandb": bool(run is not None),
+    }
+    with open(os.path.join(directory, "run.json"), "w", encoding="utf-8") as file:
+        json.dump(metadata, file, indent=2, sort_keys=True)
+        file.write("\n")
 
     # Evaluate model
     test_acc = evaluate(model, data)

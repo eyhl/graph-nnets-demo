@@ -22,9 +22,16 @@ Use conda/mamba for PyTorch + PyG (avoids compiling native extensions):
 mamba env create -f environment.yml
 mamba activate graph-nnets-demo
 
-python src/models/train_model.py
-python src/models/predict_model.py
+make train
+make eval
 ```
+
+Hydra overrides can be passed via `ARGS`, e.g.:
+```bash
+make train ARGS='experiment.hyperparams.epochs=50 experiment.hyperparams.lr=0.005'
+```
+
+A small run metadata file is written to `models/run.json` on training.
 
 If you *really* want `venv`/`pip`, you’ll need a Linux container or to build PyG deps from source.
 
