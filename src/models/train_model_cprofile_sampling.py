@@ -10,7 +10,6 @@ import torch.nn as nn
 import torch_geometric  # type: ignore
 from torch_geometric.loader import NeighborLoader  # type: ignore
 
-import wandb
 from src.data.make_dataset import load_data
 from src.models.model import GCN
 
@@ -18,7 +17,6 @@ sys.path.append("..")
 
 log = logging.getLogger(__name__)
 print = log.info
-wandb.init(project="group5-pyg-dtumlops", entity="group5-dtumlops")
 
 
 def evaluate(model: nn.Module, data: torch_geometric.data.Data) -> float:
@@ -77,7 +75,6 @@ def train():
     # Evaluate model
     test_acc = evaluate(model, data)
     print(f"Test accuracy: {test_acc * 100:.2f}%")
-    wandb.log({"Test accuracy": test_acc})
 
 
 def training_loop(
@@ -111,7 +108,6 @@ def training_loop(
         train_loss.append(np.mean(train_loss_batch))
         # print
         print(f"Epoch: {epoch:03d}, Loss: {np.mean(train_loss_batch):.4f}")
-        wandb.log({"Training loss": np.mean(train_loss_batch)})
     return model
 
 

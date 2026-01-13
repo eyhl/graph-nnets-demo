@@ -4,7 +4,7 @@ import os
 import platform
 import sys
 from datetime import datetime, timezone
-from typing import Any, Optional
+from typing import Any, Optional, cast
 
 import hydra
 import torch
@@ -27,10 +27,13 @@ def _init_wandb(hparams: Any) -> Optional[Any]:
 
     import wandb  # imported lazily
 
+    config_dict_raw = OmegaConf.to_container(hparams, resolve=True)
+    config_dict = cast(dict[str, Any] | str | None, config_dict_raw)
+
     return wandb.init(
         project=getattr(hparams, "wandb_project", "graph-nnets-demo"),
         entity=getattr(hparams, "wandb_entity", None),
-        config=OmegaConf.to_container(hparams, resolve=True),
+        config=config_dict,
     )
 
 
