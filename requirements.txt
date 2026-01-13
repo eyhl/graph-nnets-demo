@@ -9,4 +9,5 @@ omegaconf~=2.1.1
 python-dotenv==0.19.2
 wandb  # optional (enabled via config)
 
+# Install this repo as a package
 -e .
