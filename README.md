@@ -41,6 +41,12 @@ docker build -t graph-nnets-demo .
 docker run --rm -it graph-nnets-demo
 ```
 
+On Apple Silicon (M1/M2/M3), PyTorch-Geometric wheels are often only available for `linux/amd64`. Build and run with:
+```bash
+docker build --platform=linux/amd64 -t graph-nnets-demo .
+docker run --platform=linux/amd64 --rm -it graph-nnets-demo
+```
+
 ## Configuration
 Runs are Hydra config-driven:
 - Default config: `src/config/default_config.yaml`
