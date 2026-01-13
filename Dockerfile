@@ -17,7 +17,8 @@ RUN pip install --no-cache-dir -U pip setuptools wheel \
   && pip install --no-cache-dir .
 
 # Torch / PyG (CPU) pinned for reproducibility.
-RUN pip install --no-cache-dir torch==2.2.2 torchvision==0.17.2 \
+# Important: torch version must match the PyG wheel index below.
+RUN pip install --no-cache-dir torch==2.2.0 torchvision==0.17.0 \
   && pip install --no-cache-dir scipy \
   && pip install --no-cache-dir \
     torch-scatter -f https://data.pyg.org/whl/torch-2.2.0+cpu.html \
