@@ -14,7 +14,7 @@ COPY ./entrypoint.sh ./entrypoint.sh
 
 RUN pip install --no-cache-dir -U pip setuptools wheel \
   && pip install --no-cache-dir -r requirements-docker.txt \
-  && pip install --no-cache-dir -e .
+  && pip install --no-cache-dir .
 
 # Torch / PyG (CPU) pinned for reproducibility.
 RUN pip install --no-cache-dir torch==2.2.2 torchvision==0.17.2 \
