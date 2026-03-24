@@ -2,12 +2,11 @@ graph-nnets-demo
 ===============
 A minimal, local-first MLOps-style repo for training and evaluating a Graph Neural Network (GCN) on the Cora citation dataset (via PyTorch-Geometric).
 
-This repo is intentionally "public-sector friendly": it emphasizes reproducibility, clear train/eval separation, and config-driven runs, and it avoids cloud-specific wiring and fragile data tooling.
+This repo emphasizes reproducibility, clear train/eval separation, and config-driven runs, and it avoids cloud-specific wiring and fragile data tooling.
 
-## What this repo signals
-- Reproducible runs: pinned dependencies + Dockerfile
-- Operational thinking: one command to train, one to evaluate
-- Restraint/clarity: no cloud build, no sweeps, no external data remotes
+## Overview
+Originally part of MLOps course work, the total workflow of the project is summarized in the following flowchart
+![Alt text](reports/figures/flowchart.png?raw=true "Flowchart")
 
 ## W&B (optional)
 You can browse historical results from the original project without retraining:
