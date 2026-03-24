@@ -4,10 +4,6 @@ A minimal, local-first MLOps-style repo for training and evaluating a Graph Neur
 
 This repo emphasizes reproducibility, clear train/eval separation, and config-driven runs, and it avoids cloud-specific wiring and fragile data tooling.
 
-## Overview
-Originally part of MLOps course work, the total workflow of the project is summarized in the following flowchart
-![Alt text](reports/figures/flowchart.png?raw=true "Flowchart")
-
 ## W&B (optional)
 You can browse historical results from the original project without retraining:
 - Overview report: https://wandb.ai/group5-dtumlops/group5-pyg-dtumlops/reports/Overview-of-project-results--VmlldzoxNDYyODk2
